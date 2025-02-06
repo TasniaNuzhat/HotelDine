@@ -78,11 +78,7 @@ class _DeleteRoomState extends State<DeleteRoom> {
         documentId: documentId,
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Room deleted successfully!')),
-      );
-
-      Navigator.of(context).pop(true); // Return success to the previous screen
+      Navigator.of(context).pop(true);
     } catch (e) {
       print('Error deleting room: $e');
       ScaffoldMessenger.of(context).showSnackBar(

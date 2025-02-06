@@ -25,9 +25,8 @@ class _MyProfileState extends State<myprofile> {
     super.initState();
 
     client = Client()
-      ..setEndpoint(
-          'https://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
-      ..setProject('676506150033480a87c5'); // Replace with your project ID
+      ..setEndpoint('https://cloud.appwrite.io/v1')
+      ..setProject('676506150033480a87c5');
 
     database = Databases(client);
 
@@ -51,8 +50,8 @@ class _MyProfileState extends State<myprofile> {
 
       // Fetch all documents from Appwrite
       final response = await database.listDocuments(
-        databaseId: '67650e170015d7a01bc8', // Replace with your database ID
-        collectionId: '67650e290037f19f628f', // Replace with your collection ID
+        databaseId: '67650e170015d7a01bc8',
+        collectionId: '67650e290037f19f628f',
       );
 
       // Debugging: Print response

@@ -241,13 +241,16 @@ class _RoomSelectedState extends State<RoomSelected> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-
-            // **Payment Methods**
-            // Payment Methods Section with Logos
+            SizedBox(height: 8),
             Text('Payment Methods',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
+
+            SizedBox(height: 5),
+            Text(
+              'Number: 01714227495 (Bkash,Nagod,Rocket)',
+              style: TextStyle(fontSize: 12),
+            ),
 
             Row(
               children: [
@@ -307,7 +310,7 @@ class _RoomSelectedState extends State<RoomSelected> {
                           SnackBar(
                               content: Text('Please select a payment method.')),
                         );
-                        return; // Prevent further execution if payment method is not selected
+                        return;
                       }
 
                       // Check if transaction ID is entered

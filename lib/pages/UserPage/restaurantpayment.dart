@@ -116,6 +116,11 @@ class _PaynowState extends State<Paynow> {
                 'Payment methods',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 5),
+              Text(
+                'Number: 01714227495 (Bkash,Nagod,Rocket)',
+                style: TextStyle(fontSize: 12),
+              ),
               SizedBox(height: 20),
               paymentOption('Bkash'),
               paymentOption('Nagad'),

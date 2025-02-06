@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:appwrite/models.dart' as appwrite_models;
 
 import 'changepassword.dart';
+
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
 
@@ -20,7 +21,6 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController passwordController = TextEditingController();
   bool isPasswordVisible = false;
 
-
   bool isLoading = true;
   late Client client;
   late Databases database;
@@ -32,13 +32,14 @@ class _EditProfileState extends State<EditProfile> {
 
     // Initialize Appwrite client
     client = Client()
-      ..setEndpoint('https://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
-      ..setProject('676506150033480a87c5'); // Replace with your project ID
+      ..setEndpoint('https://cloud.appwrite.io/v1')
+      ..setProject('676506150033480a87c5');
 
     database = Databases(client);
 
     fetchUserData();
   }
+
   Future<void> fetchUserData() async {
     setState(() {
       isLoading = true;
@@ -65,7 +66,7 @@ class _EditProfileState extends State<EditProfile> {
       appwrite_models.Document? userDoc;
       try {
         userDoc = response.documents.firstWhere(
-              (doc) => doc.data['email'] == firebaseUser.email,
+          (doc) => doc.data['email'] == firebaseUser.email,
         );
       } catch (e) {
         userDoc = null; // No document found
@@ -122,14 +123,14 @@ class _EditProfileState extends State<EditProfile> {
 
         // Fetch the latest user document
         final response = await database.listDocuments(
-          databaseId: '67650e170015d7a01bc8', // Replace with your database ID
-          collectionId: '67650e290037f19f628f', // Replace with your collection ID
+          databaseId: '67650e170015d7a01bc8',
+          collectionId: '67650e290037f19f628f',
         );
 
         appwrite_models.Document? userDoc;
         try {
           userDoc = response.documents.firstWhere(
-                (doc) => doc.data['email'] == firebaseUser.email,
+            (doc) => doc.data['email'] == firebaseUser.email,
           );
         } catch (e) {
           userDoc = null;
@@ -144,7 +145,7 @@ class _EditProfileState extends State<EditProfile> {
           return;
         }
 
-        String documentId = userDoc.$id; // Now safe to access
+        String documentId = userDoc.$id;
 
         final updateResponse = await database.updateDocument(
           databaseId: '67650e170015d7a01bc8',
@@ -152,12 +153,11 @@ class _EditProfileState extends State<EditProfile> {
           documentId: documentId,
           data: {
             'fullName': nameController.text,
-           'email': emailAddressController.text,
-          'phone': phoneController.text,
+            'email': emailAddressController.text,
+            'phone': phoneController.text,
           },
         );
         print("Update Response: ${updateResponse.data}");
-
 
         Fluttertoast.showToast(msg: 'Profile updated successfully');
         setState(() {
@@ -172,15 +172,12 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -200,8 +197,6 @@ class _EditProfileState extends State<EditProfile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-
                 const SizedBox(height: 20),
 
                 // Email Field
@@ -209,12 +204,11 @@ class _EditProfileState extends State<EditProfile> {
                   controller: emailAddressController,
                   keyboardType: TextInputType.emailAddress,
                   readOnly: true,
-                  style: const TextStyle(color:Color(0xFF808080)),
+                  style: const TextStyle(color: Color(0xFF808080)),
                   decoration: InputDecoration(
                     hintText: 'Email address',
                     filled: true,
                     fillColor: const Color(0xFFF5F5F5),
-
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                       borderSide: BorderSide.none,
@@ -250,7 +244,6 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 const SizedBox(height: 14),
 
-
                 TextFormField(
                   controller: phoneController,
                   keyboardType: TextInputType.phone,
@@ -272,14 +265,14 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 const SizedBox(height: 14),
 
-
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const ChangePasswordPage()),
                       );
                     },
                     child: const Text(
@@ -294,9 +287,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 const SizedBox(height: 10),
 
-
                 const SizedBox(height: 20),
-
 
                 Center(
                   child: ElevatedButton(
@@ -304,7 +295,8 @@ class _EditProfileState extends State<EditProfile> {
                       if (_formKey.currentState!.validate()) {
                         await updateProfileData();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Profile updated successfully!')),
+                          const SnackBar(
+                              content: Text('Profile updated successfully!')),
                         );
                       }
                     },
@@ -312,7 +304,8 @@ class _EditProfileState extends State<EditProfile> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16),
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                   ),
@@ -325,9 +318,3 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 }
-
-
-
-
-
-

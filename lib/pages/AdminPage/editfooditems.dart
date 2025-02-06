@@ -67,7 +67,7 @@ class _FoodItemsEditState extends State<FoodItemsEdit> {
   }
 
   Future<void> updateItemDetails() async {
-    if (!_formKey.currentState!.validate()) return; // Validate form fields
+    if (!_formKey.currentState!.validate()) return;
 
     try {
       await database.updateDocument(

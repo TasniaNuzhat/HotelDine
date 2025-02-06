@@ -62,13 +62,13 @@ class _AddRoom extends State<AddRoom> {
       return;
     }
 
-    // Check if the room number is already taken
+    // Check if the room number is already taken:
     try {
       final existingRooms = await database.listDocuments(
-        databaseId: '67650e170015d7a01bc8', // Replace with your database ID
-        collectionId: '6784c4dd00332fc62aeb', // Replace with your collection ID
+        databaseId: '67650e170015d7a01bc8',
+        collectionId: '6784c4dd00332fc62aeb',
         queries: [
-          Query.equal('RoomNumber', roomNumber.text), // Correct query syntax
+          Query.equal('RoomNumber', roomNumber.text),
         ],
       );
 
@@ -81,7 +81,7 @@ class _AddRoom extends State<AddRoom> {
       }
 
       setState(() {
-        roomNumberError = null; // Clear error message if valid
+        roomNumberError = null;
       });
 
       final String fileId = ID.unique();

@@ -42,9 +42,8 @@ class AvailablefoodsState extends State<Availablefoods> {
     super.initState();
 
     client = Client()
-      ..setEndpoint(
-          'https://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
-      ..setProject('676506150033480a87c5'); // Replace with your project ID
+      ..setEndpoint('https://cloud.appwrite.io/v1')
+      ..setProject('676506150033480a87c5');
 
     database = Databases(client);
 
@@ -53,32 +52,32 @@ class AvailablefoodsState extends State<Availablefoods> {
 
   Future<void> fetchItems() async {
     setState(() {
-      isLoading = true; // Show loading indicator before fetching
+      isLoading = true;
     });
     try {
       final result = await database.listDocuments(
         databaseId: '67650e170015d7a01bc8',
-        collectionId: '679914b6002ca53ab39b', //food container
+        collectionId: '679914b6002ca53ab39b',
       );
 
       setState(() {
         items = result.documents.map((doc) {
           return {
-            'documentId': doc.$id, // Store the document ID
+            'documentId': doc.$id,
             'itemName': doc.data['FoodItemName'],
             'itemDescription': doc.data['Description'],
             'category': doc.data['Category'],
             'price': doc.data['Price'],
-            'image': doc.data['ImageUrl'], // Use the stored image URL
+            'image': doc.data['ImageUrl'],
           };
         }).toList();
 
         filteredItems = items;
-        isLoading = false; // Hide loading indicator after fetching
+        isLoading = false;
       });
     } catch (e) {
       setState(() {
-        isLoading = false; // Hide loading indicator if there's an error
+        isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching items: $e')),
@@ -99,8 +98,8 @@ class AvailablefoodsState extends State<Availablefoods> {
 
       // Check if the item already exists in the cart for this user
       final result = await database.listDocuments(
-        databaseId: '67650e170015d7a01bc8', // Replace with your database ID
-        collectionId: '679e8489002cd468bb6b', // Replace with your collection ID
+        databaseId: '67650e170015d7a01bc8',
+        collectionId: '679e8489002cd468bb6b',
         queries: [
           Query.equal('Email', user.email ?? ''),
           Query.equal('cartItemName', itemName),
@@ -213,9 +212,7 @@ class AvailablefoodsState extends State<Availablefoods> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: isLoading
-          ? Center(
-              child:
-                  CircularProgressIndicator()) // Show loading spinner while data is being fetched
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
                 children: [
@@ -241,8 +238,7 @@ class AvailablefoodsState extends State<Availablefoods> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                            width: 10), // Space between search and dropdown
+                        SizedBox(width: 10),
                         // Dropdown with fixed width
                         SizedBox(
                           width: 130, // Adjust as needed

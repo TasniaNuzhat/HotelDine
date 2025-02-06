@@ -28,7 +28,7 @@ class _SignupState extends State<Signup> {
     try {
       // Firebase Authentication signup
       final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: userEmail.text.toLowerCase(), // Make email lowercase
         password: userPassword.text,
       );
@@ -63,8 +63,8 @@ class _SignupState extends State<Signup> {
       String errorMessage = e.code == 'weak-password'
           ? 'The password provided is too weak.'
           : e.code == 'email-already-in-use'
-              ? 'The account already exists for that email.'
-              : e.message ?? 'An error occurred';
+          ? 'The account already exists for that email.'
+          : e.message ?? 'An error occurred';
 
       // Set the email error message if the error is related to the email already being in use
       if (e.code == 'email-already-in-use') {
@@ -132,22 +132,23 @@ class _SignupState extends State<Signup> {
                   TextFormField(
                     controller: fullNameControl,
                     decoration:
-                        customInputDecoration('Full name', Icons.person),
+                    customInputDecoration('Full name', Icons.person),
                     validator: (value) =>
-                        value!.isEmpty ? 'Please enter your full name' : null,
+                    value!.isEmpty ? 'Please enter your full name' : null,
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: userEmail,
                     decoration:
-                        customInputDecoration('Email address', Icons.email),
+                    customInputDecoration('Email address', Icons.email),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter an email';
                       }
                       // Regex to validate email format and ensure lowercase letters only
-                      if (!RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$')
+                      if (!RegExp(
+                          r'^[a-z0-9._%+-]+@(gmail|yahoo|outlook)\.com$')
                           .hasMatch(value)) {
                         return 'Please enter a valid email address in lowercase';
                       }
@@ -167,7 +168,7 @@ class _SignupState extends State<Signup> {
                   TextFormField(
                     controller: phoneNumber,
                     decoration:
-                        customInputDecoration('Phone number', Icons.phone),
+                    customInputDecoration('Phone number', Icons.phone),
                     keyboardType: TextInputType.phone,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -196,7 +197,7 @@ class _SignupState extends State<Signup> {
                       );
                       if (pickedDate != null) {
                         dobController.text =
-                            "${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.year}";
+                        "${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.year}";
                       }
                     },
                     validator: (value) {
@@ -218,7 +219,7 @@ class _SignupState extends State<Signup> {
                         final age = currentDate.year -
                             dob.year -
                             (currentDate.isBefore(DateTime(
-                                    currentDate.year, dob.month, dob.day))
+                                currentDate.year, dob.month, dob.day))
                                 ? 1
                                 : 0);
 
@@ -235,7 +236,7 @@ class _SignupState extends State<Signup> {
                   TextFormField(
                     controller: userPassword,
                     decoration:
-                        customInputDecoration('Password', Icons.lock).copyWith(
+                    customInputDecoration('Password', Icons.lock).copyWith(
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscurePassword
@@ -259,8 +260,8 @@ class _SignupState extends State<Signup> {
                   TextFormField(
                     controller: confirmPassword,
                     decoration:
-                        customInputDecoration('Confirm password', Icons.lock)
-                            .copyWith(
+                    customInputDecoration('Confirm password', Icons.lock)
+                        .copyWith(
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscureConfirmPassword
