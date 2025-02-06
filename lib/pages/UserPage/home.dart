@@ -217,7 +217,7 @@ class Homepage extends StatelessWidget {
                                     ),
                                     SizedBox(
                                         width:
-                                            8), // Add spacing between text and icon
+                                            8),
                                     Icon(
                                       Icons.arrow_forward,
                                       color: Colors.white,

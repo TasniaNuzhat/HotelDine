@@ -11,8 +11,8 @@ class getStartedPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Center(
-            child: Padding(  // Correct padding with only top margin
-              padding: const EdgeInsets.only(top: 45,left: 20,right: 20), // Specify only top padding
+            child: Padding(
+              padding: const EdgeInsets.only(top: 45,left: 20,right: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

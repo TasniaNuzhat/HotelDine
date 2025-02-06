@@ -124,10 +124,10 @@ class adminPage extends StatelessWidget {
                 ),
               ),
               child: Center(
-                // Center the button within the container
+               
                 child: SizedBox(
-                  width: 194, // Set desired width
-                  height: 30, // Set desired height
+                  width: 194,
+                  height: 30,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -198,7 +198,7 @@ class adminPage extends StatelessWidget {
                           );
                         },
                       ) ??
-                      false; // Default to false if dialog is dismissed
+                      false;
 
                   if (confirmLogout) {
                     final prefs = await SharedPreferences.getInstance();
